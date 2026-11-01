@@ -1,0 +1,14 @@
+{
+  "stage": "domain-design",
+  "upstream_ids": ["US1.1", "US2.1", "US2.2", "US3.1", "US3.2", "US3.3", "US3.4", "US3.5"],
+  "coverage": [
+    { "id": "US1.1", "status": "OK", "target": "Auth" },
+    { "id": "US2.1", "status": "OK", "target": "Doctors" },
+    { "id": "US2.2", "status": "OK", "target": "Doctors" },
+    { "id": "US3.1", "status": "OK", "target": "Leave" },
+    { "id": "US3.2", "status": "OK", "target": "Leave" },
+    { "id": "US3.3", "status": "OK", "target": "Leave" },
+    { "id": "US3.4", "status": "OK", "target": "Leave" },
+    { "id": "US3.5", "status": "OK", "target": "Leave" }
+  ]
+}

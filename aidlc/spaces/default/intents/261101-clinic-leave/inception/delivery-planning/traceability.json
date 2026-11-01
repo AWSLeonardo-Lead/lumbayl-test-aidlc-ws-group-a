@@ -1,0 +1,14 @@
+{
+  "stage": "delivery-planning",
+  "upstream_ids": ["US1.1", "US2.1", "US2.2", "US3.1", "US3.2", "US3.3", "US3.4", "US3.5"],
+  "coverage": [
+    { "id": "US1.1", "status": "OK", "target": "Bolt 1 (U1 u1-skeleton)" },
+    { "id": "US2.1", "status": "OK", "target": "Bolt 2a (U2 u2-doctors)" },
+    { "id": "US2.2", "status": "OK", "target": "Bolt 2a (U2 u2-doctors)" },
+    { "id": "US3.1", "status": "OK", "target": "Bolt 2b (U3 u3-leave)" },
+    { "id": "US3.2", "status": "OK", "target": "Bolt 2b (U3 u3-leave)" },
+    { "id": "US3.3", "status": "OK", "target": "Bolt 2b (U3 u3-leave)" },
+    { "id": "US3.4", "status": "OK", "target": "Bolt 2b (U3 u3-leave)" },
+    { "id": "US3.5", "status": "OK", "target": "Bolt 2b (U3 u3-leave)" }
+  ]
+}

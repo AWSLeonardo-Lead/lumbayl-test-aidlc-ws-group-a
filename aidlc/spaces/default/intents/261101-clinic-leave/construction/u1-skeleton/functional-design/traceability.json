@@ -1,0 +1,16 @@
+{
+  "stage": "functional-design",
+  "unit": "u1-skeleton",
+  "upstream_ids": ["AC1.1.1", "AC1.1.2", "AC1.1.3", "AC1.1.4", "AC1.1.5"],
+  "coverage": [
+    { "id": "AC1.1.1", "status": "OK", "target": "BR1.1" },
+    { "id": "AC1.1.2", "status": "OK", "target": "BR1.2" },
+    { "id": "AC1.1.3", "status": "OK", "target": "BR1.4" },
+    { "id": "AC1.1.4", "status": "OK", "target": "BR1.4" },
+    { "id": "AC1.1.5", "status": "OK", "target": "BR1.3" }
+  ],
+  "reverse": [
+    { "id": "BR2.1", "status": "N/A", "target": "NFR1 — server binding constraint; no upstream AC" },
+    { "id": "BR2.2", "status": "N/A", "target": "NFR3 — store constraint; no upstream AC" }
+  ]
+}
