@@ -1,0 +1,22 @@
+{
+  "stage": "code-generation",
+  "unit": "u1-skeleton",
+  "version": 1,
+  "writes": [
+    { "path": "package.json" },
+    { "path": "tsconfig.json" },
+    { "path": ".prettierrc" },
+    { "path": "eslint.config.ts" },
+    { "path": "vitest.config.ts" },
+    { "path": "src/shared/store.ts" },
+    { "path": "src/shared/errors.ts" },
+    { "path": "src/shared/auth.ts" },
+    { "path": "src/features/doctors/index.ts" },
+    { "path": "src/features/leave/index.ts" },
+    { "path": "src/app.ts" },
+    { "path": "src/server.ts" },
+    { "path": "test/skeleton/store.test.ts" },
+    { "path": "test/skeleton/auth.test.ts" },
+    { "path": "test/skeleton/app.test.ts" }
+  ]
+}

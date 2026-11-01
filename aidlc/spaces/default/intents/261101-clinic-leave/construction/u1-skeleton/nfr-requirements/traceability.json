@@ -1,0 +1,10 @@
+{
+  "stage": "nfr-requirements",
+  "unit": "u1-skeleton",
+  "upstream_ids": ["NFR1", "NFR2", "NFR3"],
+  "coverage": [
+    { "id": "NFR1", "status": "OK", "target": "NFR1.1, NFR2.5" },
+    { "id": "NFR2", "status": "OK", "target": "NFR2.1, NFR2.2, NFR2.3, NFR2.4" },
+    { "id": "NFR3", "status": "OK", "target": "NFR3.1, NFR3.2, NFR3.3" }
+  ]
+}

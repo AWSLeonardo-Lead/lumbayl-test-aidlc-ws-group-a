@@ -50,6 +50,15 @@
 
 - **Skeleton Stance**: on
 
+
+
+
+- **Parked**: 2026-11-01T15:18:17Z
+
+- **Parked At Stage**: functional-design
+
+- **Parked By**: person
+
 ## Phase Progress
 <!-- Status values: Pending, Active, Verified, Skipped -->
 
@@ -89,10 +98,10 @@
 
 ### CONSTRUCTION PHASE
 - [-] functional-design — EXECUTE
-- [ ] nfr-requirements — EXECUTE
-- [ ] nfr-design — EXECUTE
-- [ ] infrastructure-design — EXECUTE
-- [ ] code-generation — EXECUTE
+- [-] nfr-requirements — EXECUTE
+- [-] nfr-design — EXECUTE
+- [-] infrastructure-design — EXECUTE
+- [-] code-generation — EXECUTE
 - [ ] build-and-test — EXECUTE
 - [ ] ci-pipeline — SKIP
 
@@ -109,7 +118,7 @@
 <!-- Derived, engine-owned projection; routing ignores hand edits. -->
 | unit | owner | functional-design | nfr-requirements | nfr-design | infrastructure-design | code-generation | gate |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| u1-skeleton | - | [?] | [ ] | [ ] | [ ] | [ ] | [?] |
+| u1-skeleton | - | [x] | [x] | [x] | [x] | [x] | [x] |
 | u2-doctors | - | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
 | u3-leave | - | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
 
@@ -118,7 +127,7 @@
 - **Current Stage**: functional-design
 - **Next Stage**: nfr-requirements
 - **Status**: Running
-- **Last Updated**: 2026-11-01T09:07:50Z
+- **Last Updated**: 2026-11-01T15:18:17Z
 
 ## Session Resume Point
 - **Last Completed Stage**: delivery-planning
