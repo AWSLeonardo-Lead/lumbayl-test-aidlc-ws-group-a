@@ -1,0 +1,25 @@
+--- a/.claude/tools/aidlc-unit.ts
++++ b/.claude/tools/aidlc-unit.ts
+@@ -1714,12 +1714,21 @@
+     return (stage?.produces ?? []).length > 0 &&
+       filterProducesByKind(stage?.produces_kinds, stage?.produces ?? [], unitKind).length === 0;
+   }));
++  // LOCAL PATCH: the writer floors receipts against every shard its clone held
++  // (main's, inherited at claim time, plus its own), so read them the same way.
++  const floorBase = claim.payload.claimed_from_oid ?? claim.payload.base_oid;
++  const baseShards = floorBase
++    ? gitOutput(projectDir, ["ls-tree", "--name-only", floorBase, "--", `${recordPrefix}/audit/`], "Cannot list base audit shards")
++        .split(/\r?\n/).filter((p) => p.endsWith(".md") && !changedAudit.includes(p))
++    : [];
++  const floorRows = [...candidateAuditEvents(projectDir, floorBase, baseShards).filter((e) => !e.event.startsWith("UNIT_") || auditBlockField(e.block, "Unit") !== claim.unit), ...authorityRows]
++    .sort((a, b) => a.timestamp < b.timestamp ? -1 : a.timestamp > b.timestamp ? 1 : a.shardIndex - b.shardIndex || a.pos - b.pos);
+   const snapshots = new Map(stages.map((stage) => [
+     stage,
+     unitLifecycleSnapshot(
+       projectDir,
+       stage,
+-      authorityRows,
++      floorRows,
+       integrationState,
+       {
+         artifactFingerprint: (stageNode, unitName) =>
