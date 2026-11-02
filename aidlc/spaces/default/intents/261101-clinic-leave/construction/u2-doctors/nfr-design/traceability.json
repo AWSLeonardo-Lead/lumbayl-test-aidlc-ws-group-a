@@ -1,0 +1,11 @@
+{
+  "stage": "nfr-design",
+  "unit": "u2-doctors",
+  "upstream_ids": ["NFR2.1", "NFR2.2", "NFR2.3", "NFR3.1"],
+  "coverage": [
+    { "id": "NFR2.1", "status": "OK", "target": "Zod DoctorSchema at request boundary in DoctorsHandler (security-design.md — Input Validation Design)" },
+    { "id": "NFR2.2", "status": "OK", "target": "requireRole(\"manager\") middleware on POST /doctors route (security-design.md — POST /doctors auth)" },
+    { "id": "NFR2.3", "status": "OK", "target": "Presence-only header check on GET /doctors; no role filter (security-design.md — GET /doctors auth)" },
+    { "id": "NFR3.1", "status": "OK", "target": "All data through store.doctors in src/shared/store.ts; no file I/O or external calls (security-design.md — Data Storage)" }
+  ]
+}

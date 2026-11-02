@@ -1,0 +1,10 @@
+{
+  "stage": "nfr-requirements",
+  "unit": "u2-doctors",
+  "upstream_ids": ["NFR1", "NFR2", "NFR3"],
+  "coverage": [
+    { "id": "NFR1", "status": "N/A", "target": "server binding (127.0.0.1) is owned by u1-skeleton; u2-doctors adds no server configuration" },
+    { "id": "NFR2", "status": "OK", "target": "NFR2.1, NFR2.2, NFR2.3" },
+    { "id": "NFR3", "status": "OK", "target": "NFR3.1" }
+  ]
+}
