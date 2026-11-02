@@ -26,12 +26,12 @@ All requests carry identity via two HTTP headers:
 | `X-User-Id` | Caller identity — any non-empty string |
 | `X-User-Role` | Caller role — `manager` or `doctor` |
 
-Both headers must be present. If either is missing, `requireRole()` (from `src/shared/auth.ts`) returns HTTP 401 before the route handler runs. This enforces NFR2.2 and NFR2.3.
+Both headers must be present. If either is missing, `requireAuth()` (applied globally in `app.ts`, U1 owned) returns HTTP 401 before the route handler runs. This enforces NFR2.2 and NFR2.3.
 
 ### POST /doctors — manager-only (NFR2.2)
 
 ```
-Request → requireRole("manager") → [401 if headers absent] → [403 if role ≠ "manager"] → handler
+Request → requireAuth [global, app.ts] → [401 if headers absent] → requireRole("manager") → [403 if role ≠ "manager"] → handler
 ```
 
 The middleware call is `requireRole("manager")`. No other role may reach the handler.
@@ -82,7 +82,7 @@ The store is write-once-per-record (append-only). `store.reset()` is used only i
 
 | Boundary | Mechanism | Owner |
 |---|---|---|
-| Authentication (header presence) | `requireRole()` in `src/shared/auth.ts` | U1 skeleton |
+| Authentication (header presence) | `requireAuth()` in `app.ts` (global middleware) | U1 skeleton |
 | Authorization (POST — manager only) | `requireRole("manager")` applied in u2-doctors router | U2 doctors |
 | Authorization (GET — presence only) | Inline header check or `requireAnyRole()` in u2-doctors router | U2 doctors |
 | Input validation (POST body) | Zod `DoctorSchema` in `src/features/doctors/` | U2 doctors |
