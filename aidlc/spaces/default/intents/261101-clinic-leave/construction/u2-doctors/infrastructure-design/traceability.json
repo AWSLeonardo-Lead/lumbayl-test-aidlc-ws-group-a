@@ -1,0 +1,11 @@
+{
+  "stage": "infrastructure-design",
+  "unit": "u2-doctors",
+  "upstream_ids": ["NFR2.1", "NFR2.2", "NFR2.3", "NFR3.1"],
+  "coverage": [
+    { "id": "NFR2.1", "status": "N/A", "target": "Zod validation is application code, not infrastructure; no infrastructure component required" },
+    { "id": "NFR2.2", "status": "N/A", "target": "requireRole middleware is application code, not infrastructure; no infrastructure component required" },
+    { "id": "NFR2.3", "status": "N/A", "target": "Header presence check is application code, not infrastructure; no infrastructure component required" },
+    { "id": "NFR3.1", "status": "N/A", "target": "In-memory store is application code running in-process; no infrastructure component required" }
+  ]
+}
