@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "stage": "nfr-requirements",
+  "unit": "u2-doctors",
+  "workflow": null,
+  "attempt": "b55e18436d507c61",
+  "iteration": 3,
+  "reviewer": "aidlc-architecture-reviewer-agent",
+  "verdict": "READY",
+  "request_id": "review:c3b94ecea88461c1a8b870c1af575b79",
+  "request_challenge": null,
+  "artifact_fingerprint": "sha256:941331778abe95f464a5c4804b012ceea44a9184d7e022f81cb5aac2a671b45e",
+  "source_fingerprint": null,
+  "unit_source_fingerprint": null,
+  "findings": [
+    {
+      "id": "R-01",
+      "severity": "Minor",
+      "location": "aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-requirements/security-requirements.md > NFR2.3 Implementation column",
+      "finding": "NFR2.3 states \"requireRole middleware checks both X-User-Id and X-User-Role presence\" but does not specify the call signature needed to express \"any authenticated user\" — NFR2.2 uses `requireRole(\"manager\")` explicitly, creating an asymmetry that a developer must resolve by inferring or consulting auth.ts separately",
+      "required_action": "Add the expected call form in the Implementation column, for example `requireRole()` with no argument (presence-only check) or the equivalent, so the developer does not need to guess the API of the shared middleware",
+      "status": "Resolved"
+    },
+    {
+      "id": "R-02",
+      "severity": "Minor",
+      "location": "aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-requirements/security-requirements.md > NFR2.3 Implementation column",
+      "finding": "The Implementation column states \"`requireRole` middleware checks both X-User-Id and X-User-Role presence,\" but `requireRole` in `src/shared/auth.ts` does not check headers at all — it only asserts `req.auth?.role !== role` on a context that `requireAuth` already populated. The actual mechanism for GET /doctors is global `requireAuth` applied in `src/app.ts` with no additional call in the router. Suggesting \"inline header-presence check or multi-role overload\" also diverges from the real pattern. The description misdirects a reader who consults the NFR without reading `auth.ts`.",
+      "required_action": "Update NFR2.3's Implementation column to state that GET /doctors authentication is enforced by the globally applied `requireAuth` middleware in `src/app.ts`; no additional middleware call is needed in the router, and `requireRole` is not involved for this route.",
+      "status": "Resolved"
+    }
+  ],
+  "derived_findings": [
+    {
+      "id": "R-01",
+      "severity": "Minor",
+      "location": "aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-requirements/security-requirements.md > NFR2.3 Implementation column",
+      "finding": "NFR2.3 states \"requireRole middleware checks both X-User-Id and X-User-Role presence\" but does not specify the call signature needed to express \"any authenticated user\" — NFR2.2 uses `requireRole(\"manager\")` explicitly, creating an asymmetry that a developer must resolve by inferring or consulting auth.ts separately",
+      "required_action": "Add the expected call form in the Implementation column, for example `requireRole()` with no argument (presence-only check) or the equivalent, so the developer does not need to guess the API of the shared middleware",
+      "status": "Resolved",
+      "resolved_by_reviewer": true,
+      "resolved_in_review": false,
+      "introduced_in_review": false
+    },
+    {
+      "id": "R-02",
+      "severity": "Minor",
+      "location": "aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-requirements/security-requirements.md > NFR2.3 Implementation column",
+      "finding": "The Implementation column states \"`requireRole` middleware checks both X-User-Id and X-User-Role presence,\" but `requireRole` in `src/shared/auth.ts` does not check headers at all — it only asserts `req.auth?.role !== role` on a context that `requireAuth` already populated. The actual mechanism for GET /doctors is global `requireAuth` applied in `src/app.ts` with no additional call in the router. Suggesting \"inline header-presence check or multi-role overload\" also diverges from the real pattern. The description misdirects a reader who consults the NFR without reading `auth.ts`.",
+      "required_action": "Update NFR2.3's Implementation column to state that GET /doctors authentication is enforced by the globally applied `requireAuth` middleware in `src/app.ts`; no additional middleware call is needed in the router, and `requireRole` is not involved for this route.",
+      "status": "Resolved",
+      "reviewer_note": "NFR2.3 Implementation column now correctly states that `requireAuth` applied globally in `app.ts` enforces header presence for all routes; GET /doctors adds no per-route auth middleware and `requireRole` is not referenced. This matches the actual code in `src/shared/auth.ts` and `src/app.ts`.",
+      "resolved_by_reviewer": true,
+      "resolved_in_review": true,
+      "introduced_in_review": false
+    }
+  ],
+  "body": "## Review\n\n**Verdict:** READY\n**Reviewer:** aidlc-architecture-reviewer-agent\n**Date:** 2026-11-02T03:02:31Z\n**Iteration:** 3\n**Verdict Dictated:** no\n\n### Findings\n\n**Prior findings**\n\n| ID | Now | Severity | Note |\n|---|---|---|---|\n| R-02 | Fixed | Minor | NFR2.3 Implementation column now correctly states that `requireAuth` applied globally in `app.ts` enforces header presence for all routes; GET /doctors adds no per-route auth middleware and `requireRole` is not referenced. This matches the actual code in `src/shared/auth.ts` and `src/app.ts`. |\n\n**New findings**\n\n| Severity | Location | Finding | Required action |\n|---|---|---|---|\n\n### Validation Tool Results\n\n| Tool | Result | Interpretation |\n|---|---|---|\n| Manual cross-reference: NFR2.3 vs src/shared/auth.ts and src/app.ts | PASS | `requireAuth` is applied globally in `app.ts`; `requireRole` only checks `req.auth?.role`, not headers; NFR2.3 description is now accurate |\n\n### Summary\n\nAll NFR artifacts for u2-doctors are accurate and consistent with the codebase. The sole open finding from prior iterations (R-02) has been fixed: NFR2.3 now correctly attributes GET /doctors authentication to the globally applied `requireAuth` middleware in `app.ts`, matching the actual implementation.\n",
+  "recorded_at": "2026-11-02T03:03:45Z"
+}
