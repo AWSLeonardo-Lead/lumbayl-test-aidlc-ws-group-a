@@ -32,8 +32,10 @@ All u2-doctors components live under `src/features/doctors/`. No shared files ar
 ```
 HTTP POST /doctors
   └─► DoctorsRouter
+        ├─► requireAuth               [global in app.ts — U1 owned]
+        │     → 401 (missing or empty headers)
         ├─► requireRole("manager")    [from src/shared/auth.ts — U1 owned]
-        │     → 401 (missing headers) / 403 (wrong role)
+        │     → 403 (wrong role)
         ├─► DoctorSchema.parse(body)  [Zod — U2 owned]
         │     → 400 (invalid body)
         └─► DoctorsHandler
@@ -46,10 +48,8 @@ HTTP POST /doctors
 ```
 HTTP GET /doctors
   └─► DoctorsRouter
-        ├─► header presence check     [inline or requireAnyRole — U2 owned]
-        │     → 401 (missing headers)
-        │     NOTE: do NOT use requireRole("manager") or requireRole("doctor");
-        │     chaining them would reject valid users
+        ├─► requireAuth               [global in app.ts — U1 owned]
+        │     → 401 (missing or empty headers)
         └─► DoctorsHandler
               └─► store.doctors        [from src/shared/store.ts — U1 owned]
                     → 200 Doctor[]
@@ -73,7 +73,8 @@ HTTP GET /doctors
 | Resource | Owner | U2 access pattern |
 |---|---|---|
 | `store.doctors` | U1 skeleton | Read (GET) and append (POST) |
-| `requireRole()` | U1 skeleton | Import and apply in router |
+| `requireAuth()` | U1 skeleton | Applied globally in app.ts; GET /doctors relies on this for 401 coverage |
+| `requireRole()` | U1 skeleton | Import and apply in router for POST /doctors only (403 on wrong role) |
 | `src/shared/errors.ts` | U1 skeleton | Import error helpers as needed |
 
 U2 must not edit any of these files; it only imports and calls them.

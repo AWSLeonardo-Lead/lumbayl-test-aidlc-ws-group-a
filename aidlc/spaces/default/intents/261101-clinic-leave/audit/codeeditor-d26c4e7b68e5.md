@@ -806,3 +806,100 @@
 **Review Finding Dispositions**: {"version":1,"dispositions":[{"artifact":"aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/code-generation/code-generation-plan.md","id":"R-01","fingerprint":"sha256:1a9151a393c5f3dd625bfcd3e840acad76b61efb810cd460bf1e5cd9de465881","status":"Accepted risk","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/code-generation/units/u2-doctors/b55e18436d507c61/1.json","digest":"sha256:29c58adcc848994eaedc741caa8c6718c2325daaa6b552f34fdc8b8fac861d12"}},{"artifact":"aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/code-generation/code-generation-plan.md","id":"R-02","fingerprint":"sha256:554cb33c775aacd8edb8d707845008c70de2d96fe5f1bdfa2c1ae11a5649aaa0","status":"Accepted risk","decided_at_severity":"Minor","reviewed_record":{"path":".aidlc-engine/reviews/code-generation/units/u2-doctors/b55e18436d507c61/1.json","digest":"sha256:29c58adcc848994eaedc741caa8c6718c2325daaa6b552f34fdc8b8fac861d12"}}]}
 
 ---
+
+## Review Requested
+**Timestamp**: 2026-11-02T01:58:41Z
+**Event**: REVIEW_REQUESTED
+**Stage**: nfr-requirements
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u2-doctors
+**Attempt Generation**: 1
+**Iteration**: 2
+**Recovery**: stale-receipt
+**Recovery Cause**: artifact
+**Artifact Fingerprint**: sha256:c6b61c2ac5bc55873be9d0910447e485942dd78eb34d8604c57bec6e8058affa
+**Request Id**: review:04a125020fe9a86be877a6e786ea9413
+**Review File**: .aidlc-engine/reviews/nfr-requirements/units/u2-doctors/b55e18436d507c61/2.04a125020fe9a86be877a6e786ea9413.review.md
+
+---
+
+## Review Requested
+**Timestamp**: 2026-11-02T01:58:45Z
+**Event**: REVIEW_REQUESTED
+**Stage**: nfr-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u2-doctors
+**Attempt Generation**: 1
+**Iteration**: 2
+**Recovery**: stale-receipt
+**Recovery Cause**: artifact
+**Artifact Fingerprint**: sha256:9c1f8d2c3027bf59c2319bf2d4bc11bc676c432207e15cf949af2bdf68c24de5
+**Request Id**: review:c404ccc9008f8b56d8005ff2abb39ee9
+**Review File**: .aidlc-engine/reviews/nfr-design/units/u2-doctors/b55e18436d507c61/2.c404ccc9008f8b56d8005ff2abb39ee9.review.md
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-02T02:00:47Z
+**Event**: REVIEW_COMPLETED
+**Stage**: nfr-requirements
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u2-doctors
+**Attempt Generation**: 1
+**Iteration**: 2
+**Verdict**: READY
+**Review Headings Made Level 3**: line 7: ## Review
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:c6b61c2ac5bc55873be9d0910447e485942dd78eb34d8604c57bec6e8058affa
+**Artifact Fingerprint**: sha256:c6b61c2ac5bc55873be9d0910447e485942dd78eb34d8604c57bec6e8058affa
+**Request Id**: review:04a125020fe9a86be877a6e786ea9413
+**Review Record**: .aidlc-engine/reviews/nfr-requirements/units/u2-doctors/b55e18436d507c61/2.json
+**Review Record Digest**: sha256:553e8a7e632cb9a78c46257000f7faa8060e801f84991e7bf7abde3ed5a06e56
+
+---
+
+## Review Completed
+**Timestamp**: 2026-11-02T02:00:48Z
+**Event**: REVIEW_COMPLETED
+**Stage**: nfr-design
+**Reviewer**: aidlc-architecture-reviewer-agent
+**Unit**: u2-doctors
+**Attempt Generation**: 1
+**Iteration**: 2
+**Verdict**: READY
+**Review Headings Made Level 3**: line 3: ## Review
+**Review Verdict Dictated**: no
+**Request Fingerprint**: sha256:9c1f8d2c3027bf59c2319bf2d4bc11bc676c432207e15cf949af2bdf68c24de5
+**Artifact Fingerprint**: sha256:9c1f8d2c3027bf59c2319bf2d4bc11bc676c432207e15cf949af2bdf68c24de5
+**Request Id**: review:c404ccc9008f8b56d8005ff2abb39ee9
+**Review Record**: .aidlc-engine/reviews/nfr-design/units/u2-doctors/b55e18436d507c61/2.json
+**Review Record Digest**: sha256:2779913a3cfe85912792bd0228e0abce466417267b5ebccfe18b6832388e96db
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-02T02:01:02Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-requirements/security-requirements.md
+**Context**: construction > u2-doctors > nfr-requirements > security-requirements.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-02T02:01:09Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-design/logical-components.md
+**Context**: construction > u2-doctors > nfr-design > logical-components.md
+
+---
+
+## Artifact Updated
+**Timestamp**: 2026-11-02T02:01:15Z
+**Event**: ARTIFACT_UPDATED
+**Tool**: Edit
+**File**: <project-dir>/aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-design/logical-components.md
+**Context**: construction > u2-doctors > nfr-design > logical-components.md
+
+---
