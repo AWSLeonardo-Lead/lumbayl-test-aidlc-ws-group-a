@@ -11,9 +11,9 @@
   "base_oid": "23c4daafb11c776dd340b4f5d81406c1120f338b",
   "integration_ref": "refs/remotes/origin/main",
   "claim_ref": "refs/heads/claim/430b37ca/u2-doctors",
-  "predecessor_oid": "4d113385e366c541bfe6d189e6e08553240a190e",
+  "predecessor_oid": "b6bb968074a191156cbc513f9717a762dca961a6",
   "gate_rhythm": "per-stage",
   "audit_shard": "codeeditor-d26c4e7b68e5.md",
-  "candidate_tree_oid": "f92b560dd418c2e2a550805e3de06f014a05735b",
-  "candidate_head_oid": "a2a808e3b93bff4ef49416762841c09883a15796"
+  "candidate_tree_oid": "f81ee62a2e4c75a2a31967d03aeedb3d8e899cfe",
+  "candidate_head_oid": "d4f0060bf2f7353ec49c7a4454647ac87823caa9"
 }

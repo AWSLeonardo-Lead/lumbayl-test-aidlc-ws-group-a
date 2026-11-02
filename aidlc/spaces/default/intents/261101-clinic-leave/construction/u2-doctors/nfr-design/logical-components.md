@@ -63,7 +63,7 @@ HTTP GET /doctors
 |---|---|---|
 | Invalid request body | Single request; 400 returned before store access | Zod parse in handler |
 | Duplicate doctor id | Single request; 409 returned before append | Uniqueness check in handler |
-| Missing auth headers | Single request; 401 before handler runs | requireRole middleware |
+| Missing auth headers | Single request; 401 before handler runs | requireAuth middleware (global, U1) |
 | Wrong role on POST | Single request; 403 before handler runs | requireRole middleware |
 
 ---
