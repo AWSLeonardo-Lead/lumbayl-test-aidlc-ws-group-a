@@ -19,7 +19,7 @@
 |---|---|---|---|
 | NFR2.1 | Input validation | All POST /doctors request bodies must be validated with Zod before any business logic runs | Zod schema with required `id: string` and `name: string`; invalid input → HTTP 400 |
 | NFR2.2 | Authorization | POST /doctors requires manager role; enforced before store access | `requireRole("manager")` middleware from `src/shared/auth.ts`; missing headers → 401, wrong role → 403 |
-| NFR2.3 | Authorization | GET /doctors requires any authenticated user; header presence enforced | `requireRole` middleware checks both X-User-Id and X-User-Role presence; missing headers → 401. Implement as inline header-presence check or a multi-role overload — do NOT chain `requireRole("manager")` and `requireRole("doctor")` as separate middleware calls (each would reject the other role). |
+| NFR2.3 | Authorization | GET /doctors requires any authenticated user; header presence enforced | `requireAuth` applied globally in `app.ts` enforces X-User-Id and X-User-Role presence for all routes; GET /doctors adds no per-route auth middleware — the global guard is sufficient; missing or empty headers → 401 |
 | NFR3.1 | Data storage | All doctor data held in the shared in-memory store only | Read/write `store.doctors` from `src/shared/store.ts`; no file I/O, no external network calls |
 
 ## Out of Scope
