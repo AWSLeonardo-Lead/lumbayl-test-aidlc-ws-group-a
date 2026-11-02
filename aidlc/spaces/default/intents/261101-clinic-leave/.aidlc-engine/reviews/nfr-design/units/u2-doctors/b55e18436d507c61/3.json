@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "stage": "nfr-design",
+  "unit": "u2-doctors",
+  "workflow": null,
+  "attempt": "b55e18436d507c61",
+  "iteration": 3,
+  "reviewer": "aidlc-architecture-reviewer-agent",
+  "verdict": "READY",
+  "request_id": "review:611e581c63454b8da183a06dba02d125",
+  "request_challenge": null,
+  "artifact_fingerprint": "sha256:cead4d84f4c0946d4726ccc4a8958a238d1988daa8f1cecacd6c2048206239f5",
+  "source_fingerprint": null,
+  "unit_source_fingerprint": null,
+  "findings": [
+    {
+      "id": "R-01",
+      "severity": "Minor",
+      "location": "aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-design/logical-components.md > Component Interactions diagram",
+      "finding": "The interaction diagram shows a single undifferentiated flow with `requireRole(\"manager\")` as the only auth step, with no separate branch for GET /doctors. A developer reading only this diagram could mistakenly apply the manager role check to GET /doctors, conflicting with the presence-only pattern documented in security-design.md.",
+      "required_action": "Add a second flow branch in the diagram distinguishing the POST path (requireRole(\"manager\") → Zod parse → handler) from the GET path (presence-only check → handler), matching the explicit guidance in security-design.md.",
+      "status": "Resolved"
+    },
+    {
+      "id": "R-02",
+      "severity": "Minor",
+      "location": "aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-design/logical-components.md > Component Interactions > POST /doctors flow",
+      "finding": "The POST flow attributes \"401 (missing headers) / 403 (wrong role)\" to `requireRole(\"manager\")`, but `requireRole` in `src/shared/auth.ts` only checks `req.auth?.role !== role` and returns 403. The 401 is produced by the global `requireAuth` middleware in `app.ts`, which runs before `requireRole`. A developer reading only this diagram would incorrectly believe `requireRole` handles both response codes.",
+      "required_action": "Annotate the diagram to show `requireAuth` (global, U1) as the step that returns 401, and `requireRole(\"manager\")` (U2-applied) as the step that returns 403. Or add a prose note clarifying that 401 comes from the global middleware upstream.",
+      "status": "Resolved"
+    },
+    {
+      "id": "R-03",
+      "severity": "Minor",
+      "location": "aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-design/logical-components.md > Component Interactions > GET /doctors flow; aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-design/security-design.md > Security Boundary Summary",
+      "finding": "The GET flow labels the header-presence check as \"U2 owned\", and the security boundary table attributes \"Authentication (header presence)\" to `requireRole()`. The actual implementation (`src/features/doctors/index.ts`) has no per-route auth middleware on GET; the route correctly relies on the global `requireAuth` applied in `app.ts` (U1 owned). The boundary table also names the wrong function: `requireAuth()`, not `requireRole()`, performs header-presence checking. These inaccuracies do not affect runtime security but misrepresent ownership and mechanism.",
+      "required_action": "In the GET diagram, replace \"U2 owned\" with a note that header presence is enforced by `requireAuth` (global, U1). In the boundary table, replace `requireRole()` with `requireAuth()` as the authentication mechanism.",
+      "status": "Resolved"
+    }
+  ],
+  "derived_findings": [
+    {
+      "id": "R-01",
+      "severity": "Minor",
+      "location": "aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-design/logical-components.md > Component Interactions diagram",
+      "finding": "The interaction diagram shows a single undifferentiated flow with `requireRole(\"manager\")` as the only auth step, with no separate branch for GET /doctors. A developer reading only this diagram could mistakenly apply the manager role check to GET /doctors, conflicting with the presence-only pattern documented in security-design.md.",
+      "required_action": "Add a second flow branch in the diagram distinguishing the POST path (requireRole(\"manager\") → Zod parse → handler) from the GET path (presence-only check → handler), matching the explicit guidance in security-design.md.",
+      "status": "Resolved",
+      "resolved_by_reviewer": true,
+      "resolved_in_review": false,
+      "introduced_in_review": false
+    },
+    {
+      "id": "R-02",
+      "severity": "Minor",
+      "location": "aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-design/logical-components.md > Component Interactions > POST /doctors flow",
+      "finding": "The POST flow attributes \"401 (missing headers) / 403 (wrong role)\" to `requireRole(\"manager\")`, but `requireRole` in `src/shared/auth.ts` only checks `req.auth?.role !== role` and returns 403. The 401 is produced by the global `requireAuth` middleware in `app.ts`, which runs before `requireRole`. A developer reading only this diagram would incorrectly believe `requireRole` handles both response codes.",
+      "required_action": "Annotate the diagram to show `requireAuth` (global, U1) as the step that returns 401, and `requireRole(\"manager\")` (U2-applied) as the step that returns 403. Or add a prose note clarifying that 401 comes from the global middleware upstream.",
+      "status": "Resolved",
+      "reviewer_note": "The POST /doctors diagram in logical-components.md now explicitly labels `requireAuth [global in app.ts — U1 owned]` as producing 401 and `requireRole(\"manager\") [from src/shared/auth.ts — U1 owned]` as producing 403. The ambiguity is resolved.",
+      "resolved_by_reviewer": true,
+      "resolved_in_review": true,
+      "introduced_in_review": false
+    },
+    {
+      "id": "R-03",
+      "severity": "Minor",
+      "location": "aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-design/logical-components.md > Component Interactions > GET /doctors flow; aidlc/spaces/default/intents/261101-clinic-leave/construction/u2-doctors/nfr-design/security-design.md > Security Boundary Summary",
+      "finding": "The GET flow labels the header-presence check as \"U2 owned\", and the security boundary table attributes \"Authentication (header presence)\" to `requireRole()`. The actual implementation (`src/features/doctors/index.ts`) has no per-route auth middleware on GET; the route correctly relies on the global `requireAuth` applied in `app.ts` (U1 owned). The boundary table also names the wrong function: `requireAuth()`, not `requireRole()`, performs header-presence checking. These inaccuracies do not affect runtime security but misrepresent ownership and mechanism.",
+      "required_action": "In the GET diagram, replace \"U2 owned\" with a note that header presence is enforced by `requireAuth` (global, U1). In the boundary table, replace `requireRole()` with `requireAuth()` as the authentication mechanism.",
+      "status": "Resolved",
+      "reviewer_note": "The GET /doctors diagram in logical-components.md now attributes `requireAuth [global in app.ts — U1 owned]` for the 401 response with no \"U2 owned\" label. The security boundary table in security-design.md now correctly names `requireAuth()` (not `requireRole()`) as the authentication mechanism, attributed to U1 skeleton.",
+      "resolved_by_reviewer": true,
+      "resolved_in_review": true,
+      "introduced_in_review": false
+    }
+  ],
+  "body": "## Review\n\n**Verdict:** READY\n**Reviewer:** aidlc-architecture-reviewer-agent\n**Date:** 2026-11-02T02:38:27Z\n**Iteration:** 3\n**Verdict Dictated:** no\n\n### Findings\n\n**Prior findings**\n\n| ID | Now | Severity | Note |\n|---|---|---|---|\n| R-02 | Fixed | Minor | The POST /doctors diagram in logical-components.md now explicitly labels `requireAuth [global in app.ts — U1 owned]` as producing 401 and `requireRole(\"manager\") [from src/shared/auth.ts — U1 owned]` as producing 403. The ambiguity is resolved. |\n| R-03 | Fixed | Minor | The GET /doctors diagram in logical-components.md now attributes `requireAuth [global in app.ts — U1 owned]` for the 401 response with no \"U2 owned\" label. The security boundary table in security-design.md now correctly names `requireAuth()` (not `requireRole()`) as the authentication mechanism, attributed to U1 skeleton. |\n\n**New findings**\n\n| Severity | Location | Finding | Required action |\n|---|---|---|---|\n\n### Validation Tool Results\n\n| Tool | Result | Interpretation |\n|---|---|---|\n| Manual artifact review | PASS | Both prior findings are remediated; no new structural issues found in security-design.md and logical-components.md |\n\n### Summary\n\nBoth open findings from iteration 2 are fully resolved: the POST flow correctly separates 401 (requireAuth, U1) from 403 (requireRole, U2), and the GET flow and boundary table correctly attribute header-presence checking to requireAuth in U1. The NFR design artifacts are ready for Code Generation.\n",
+  "recorded_at": "2026-11-02T02:41:10Z"
+}
